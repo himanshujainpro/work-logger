@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">WorkLogger</string>
+    <string name="txt_select">Select</string>
+    <string name="txt_select_date">Select date</string>
+    <string name="compose_hint">Description</string>
+    <string name="txt_submit">Submit</string>
+    <string name="txt_sign_in">SIGN IN</string>
+    <string name="txt_my_logs">My Logs</string>
+    <string name="txt_logout">Logout</string>
+    <string name="txt_no_network">Make Sure you have active Internet Connection</string>
+    <string name="txt_data_saved">Data Saved</string>
+    <string-array name="units">
+        <item>Minutes</item>
+        <item>Hours</item>
+        <item>Days</item>
+    </string-array>
+    <string name="title_activity_user_dash_board">UserDashBoardActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>

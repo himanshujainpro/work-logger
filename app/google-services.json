@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "110657841917",
+    "firebase_url": "https://worklogger-c4d74.firebaseio.com",
+    "project_id": "worklogger-c4d74",
+    "storage_bucket": "worklogger-c4d74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110657841917:android:98ff40304cb8046e146c94",
+        "android_client_info": {
+          "package_name": "com.worklogger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110657841917-78up850bls4lj5dl46cbj1fe1bfl2fg9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.worklogger",
+            "certificate_hash": "9ac39430f55edf7b8bf84c47a17731eff55f5796"
+          }
+        },
+        {
+          "client_id": "110657841917-3rhrtallcdkbih3qh5sq7k6gb3c70v3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-DeJ3EHeYMThpejuQtXo_Ab7a9KavacU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110657841917-3rhrtallcdkbih3qh5sq7k6gb3c70v3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
