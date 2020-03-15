@@ -7,6 +7,7 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,6 +27,7 @@ public class MyLogsActivity extends AppCompatActivity {
 
     private LogAdapter adapter;
     private UI mUI;
+    private ShimmerFrameLayout mShimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +64,25 @@ public class MyLogsActivity extends AppCompatActivity {
                 .setQuery(baseQuery, config, SingleLog.class)
                 .build();
 
-
-        adapter = new LogAdapter(options, mUI);
-
+        mShimmerFrameLayout = findViewById(R.id.shimmerFrameLayout);
         RecyclerView recyclerView = findViewById(R.id.rv_my_logs);
+        adapter = new LogAdapter(options, mUI, mShimmerFrameLayout, recyclerView);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mShimmerFrameLayout.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mShimmerFrameLayout.stopShimmerAnimation();
     }
 }

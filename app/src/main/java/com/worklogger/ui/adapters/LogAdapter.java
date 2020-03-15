@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.firebase.ui.firestore.paging.LoadingState;
@@ -23,10 +24,15 @@ public class LogAdapter extends FirestorePagingAdapter<SingleLog, LogAdapter.Log
      * @param options
      */
     private UI mUI;
+    private ShimmerFrameLayout mShimmerFrameLayout;
+    private RecyclerView mRecyclerView;
 
-    public LogAdapter(@NonNull FirestorePagingOptions<SingleLog> options, UI ui) {
+    public LogAdapter(@NonNull FirestorePagingOptions<SingleLog> options, UI ui
+    ,ShimmerFrameLayout shimmerFrameLayout,RecyclerView recyclerView) {
         super(options);
         this.mUI = ui;
+        this.mRecyclerView=recyclerView;
+        this.mShimmerFrameLayout=shimmerFrameLayout;
     }
 
 
@@ -60,20 +66,17 @@ public class LogAdapter extends FirestorePagingAdapter<SingleLog, LogAdapter.Log
     }
 
     @Override
-    public void onViewAttachedToWindow(@NonNull LogHolder holder) {
-        super.onViewAttachedToWindow(holder);
-        mUI.hideProgressDialog();
-    }
-
-    @Override
     protected void onError(@NonNull Exception e) {
-        mUI.hideProgressDialog();
-        mUI.showToast(e.getMessage());
+        mShimmerFrameLayout.stopShimmerAnimation();
+        mShimmerFrameLayout.setVisibility(View.GONE);
+        mUI.showToast("Something went wrong");
     }
 
     @Override
     public boolean onFailedToRecycleView(@NonNull LogHolder holder) {
-        mUI.hideProgressDialog();
+        mShimmerFrameLayout.stopShimmerAnimation();
+        mShimmerFrameLayout.setVisibility(View.GONE);
+        mUI.showToast("Something went wrong");
         return super.onFailedToRecycleView(holder);
     }
 
@@ -83,7 +86,6 @@ public class LogAdapter extends FirestorePagingAdapter<SingleLog, LogAdapter.Log
             case LOADING_INITIAL:
                 // The initial load has begun
                 // ...
-                mUI.showProgressDialog();
                 break;
             case LOADING_MORE:
                 // The adapter has started to load an additional page
@@ -91,16 +93,23 @@ public class LogAdapter extends FirestorePagingAdapter<SingleLog, LogAdapter.Log
             case LOADED:
                 // The previous load (either initial or additional) completed
                 // ...
-                mUI.hideProgressDialog();
+                mShimmerFrameLayout.stopShimmerAnimation();
+                mShimmerFrameLayout.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
                 break;
             case ERROR:
                 // The previous load (either initial or additional) failed. Call
                 // the retry() method in order to retry the load operation.
                 // ...
-                mUI.hideProgressDialog();
+                mShimmerFrameLayout.stopShimmerAnimation();
+                mShimmerFrameLayout.setVisibility(View.GONE);
                 mUI.showToast("Something went wrong");
             case FINISHED:
-                mUI.hideProgressDialog();
+                mShimmerFrameLayout.stopShimmerAnimation();
+                mShimmerFrameLayout.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                notifyDataSetChanged();
                 break;
         }
     }
