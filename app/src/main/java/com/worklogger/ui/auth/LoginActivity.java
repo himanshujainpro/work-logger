@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.worklogger.R;
 import com.worklogger.ui.dashboard.MainActivity;
+import com.worklogger.utils.Network;
 import com.worklogger.utils.UI;
 
 public class LoginActivity extends AppCompatActivity {
@@ -53,9 +54,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startGoogleSignIn(View view) {
-        ui.showProgressDialog();
-        Intent googleSignInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(googleSignInIntent, RC_SIGN_IN_GOOGLE);
+        if (Network.isInternetAvailable(this)) {
+            ui.showProgressDialog();
+            Intent googleSignInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(googleSignInIntent, RC_SIGN_IN_GOOGLE);
+        }else{
+            ui.showToast(getString(R.string.txt_no_network));
+        }
+
     }
 
     @Override
